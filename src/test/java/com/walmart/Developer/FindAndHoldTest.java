@@ -59,7 +59,7 @@ public class FindAndHoldTest {
 
 	@Test
 	public void ReservationTest() {
-		String expected = "RES"+seathold.getSeatHoldId();
+		String expected ="Reservation Confirmed!\n Your Reservation has been done.Your Reservation Code is "+"RES"+seathold.getSeatHoldId()+"\n Thank you!";
 		reservationCode = o.reserveSeats(seathold.getSeatHoldId(), "shakya.suraj07@gmail.com", seathold);
 		assertEquals(reservationCode,expected);
 	}
