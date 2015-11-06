@@ -53,3 +53,4 @@ To verify it, run mvn –version in the command prompt.
  
  If You are using  Eclipse with Maven Plugin, just import as the maven project. POm will download all required files.
  
+NOTE: Please refer flowchart.pdf , screenshot Application.docx file for quick overview of project
