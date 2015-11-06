@@ -30,7 +30,7 @@ public class FindAndHoldTest {
 
 		seathold.setSeatHoldNo(20); // 20 seats are in hold
 		seathold.setCustomerEmail("shakya.suraj07@gmail.com");
-		seathold.setSeatHoldId(new Date().getTime());
+		seathold.setSeatHoldId(Long.toString(new Date().getTime()).substring(9,13));
 		seatHoldMap.put(1, 20); // Since 20 choosen for testing which is less
 								// than 1250 i.e no of seats at venue level 1
 		seathold.setSeatHoldMap(seatHoldMap);
@@ -54,12 +54,12 @@ public class FindAndHoldTest {
 
 		assertEquals(st.getSeatHoldUpdated(), seatHoldUpdated);
 		assertEquals(st.getCustomerEmail(), "shakya.suraj07@gmail.com");
-		assertEquals(st.getSeatHoldId(), new Date().getTime());
+		assertEquals(st.getSeatHoldId(), Long.toString(new Date().getTime()).substring(9, 13));
 	}
 
 	@Test
 	public void ReservationTest() {
-		String expected = "Res"+Long.toString(seathold.getSeatHoldId()).substring(9,13);
+		String expected = "RES"+seathold.getSeatHoldId();
 		reservationCode = o.reserveSeats(seathold.getSeatHoldId(), "shakya.suraj07@gmail.com", seathold);
 		assertEquals(reservationCode,expected);
 	}

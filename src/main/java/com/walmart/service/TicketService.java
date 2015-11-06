@@ -31,5 +31,5 @@ public interface TicketService {
 	* @return a reservation confirmation code 
 	* 
 	*/
-	  String reserveSeats(long seatHoldId,  String customerEmail,SeatHold seathold);    
+	  String reserveSeats(String seatHoldId,  String customerEmail,SeatHold seathold);    
 	}

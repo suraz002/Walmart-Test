@@ -7,7 +7,7 @@ public class SeatHold {
 	
 	public String customerEmail;
 	public int seatHoldLevel;
-	public long seatHoldId;
+	public String seatHoldId;
 	public String holdmsg;
 	public int seatHoldNo;
 	public Map<Integer , Integer> seatHoldMap = null;
@@ -19,7 +19,7 @@ public Map<Integer, Integer> getSeatHoldUpdated() {
 	public void setSeatHoldUpdated(Map<Integer, Integer> seatHoldUpdated) {
 		this.seatHoldUpdated = seatHoldUpdated;
 	}
-public SeatHold(int seatHoldId,int seatHoldNo, int seatHoldLevel , String customerEmail){
+public SeatHold(String seatHoldId,int seatHoldNo, int seatHoldLevel , String customerEmail){
 		this.seatHoldId = seatHoldId;
 		this.seatHoldNo = seatHoldNo;
 		this.seatHoldLevel = seatHoldLevel;
@@ -73,10 +73,10 @@ public SeatHold(int seatHoldId,int seatHoldNo, int seatHoldLevel , String custom
 	public void setSeatHoldLevel(int seatHoldLevel) {
 		this.seatHoldLevel = seatHoldLevel;
 	}
-	public long getSeatHoldId() {
+	public String getSeatHoldId() {
 		return seatHoldId;
 	}
-	public void setSeatHoldId(long seatHoldId) {
+	public void setSeatHoldId(String seatHoldId) {
 		this.seatHoldId = seatHoldId;
 	}
 	public Map<String, Integer> getSeatHold() {

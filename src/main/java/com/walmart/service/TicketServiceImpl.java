@@ -3,6 +3,7 @@ package com.walmart.service;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
 import com.walmart.dao.*;
 import com.walmart.domain.Seat;
 import com.walmart.domain.SeatHold;
@@ -97,8 +98,8 @@ public class TicketServiceImpl implements TicketService {
 		// seathold.setHoldmsg("Entered no. of seats are not available.");
 		//
 		// }else{
-
-		seathold.setSeatHoldId(new Date().getTime());
+        String seatholdId  =Long.toString(new Date().getTime());
+		seathold.setSeatHoldId(seatholdId.substring(9, 13));
 		seathold.setCustomerEmail(customerEmail);
 		seathold.setSeatHoldMap(seatHoldMap);
 		seathold.setHoldmsg("Success!!");
@@ -119,24 +120,24 @@ public class TicketServiceImpl implements TicketService {
  * @return Message with Reservation Code  otherwise failure Message
  * 
  */
-	public String reserveSeats(long seatHoldId, String customerEmail,
+	public String reserveSeats(String seatHoldId, String customerEmail,
 			SeatHold seathold) {
 
 		String msg = "";
-		if (seathold != null) {
+	
 
-			if (seathold.getSeatHoldId() == seatHoldId
-					&& seathold.getCustomerEmail().equals(customerEmail)) {
+			if (seathold != null && seathold.getSeatHoldId().equals(seatHoldId) && seathold.getCustomerEmail().equals(customerEmail)) {
 
 				Map<Integer, Integer> updated = seatdata.AvailableSeats("U",
 						seathold.getSeatHoldUpdated());
-				msg = "Res"+ Long.toString(seathold.getSeatHoldId()).substring(9,
-								13);
+				msg = "RES"+ seathold.getSeatHoldId();
+				msg = "Reservation Confirmed!\n Your Reservation has been done.Your Reservation Code is "+msg+"\n Thank you!";
 				SendEmail(customerEmail, msg);
 
-			}
+				
 
 		} else {
+			
 			msg = "We are Sorry! Reservation cannot be made at this time.Please Enter your detail correctly!";
 		}
 

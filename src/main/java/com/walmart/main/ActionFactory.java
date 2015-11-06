@@ -57,6 +57,8 @@ public class ActionFactory extends TimerTask {
 		if (action == 1) {
 			int noOfSeats;
 			do {
+				
+				String email;
 				try {
 					System.out.println("Please Enter the Venue Level[1-4]:");
 					BufferedReader br = new BufferedReader(
@@ -88,6 +90,9 @@ public class ActionFactory extends TimerTask {
 
 		}
 		if (action == 2) {
+			String email;
+			 boolean b;
+			
 			try {
 				System.out.println("Please Enter the No of seats to Hold:");
 				BufferedReader br = new BufferedReader(new InputStreamReader(
@@ -102,15 +107,19 @@ public class ActionFactory extends TimerTask {
 						System.in));
 				int maxlevel = Integer.parseInt(br2.readLine());
 				
-				System.out.print("Please enter the Email:");
+				System.out.print("Please Enter your Email(Eg,example@domain.com):");
 				
 				BufferedReader br3 = new BufferedReader(new InputStreamReader(
 						System.in));
-				String email = br3.readLine();
-                boolean b  = actionObj.validateEmail(email);
+				 email = br3.readLine();
+                 b  = actionObj.validateEmail(email);
 				
-                if(b==false)
-                	throw new Exception("Invalid Email");
+                while(!b){
+//                	throw new Exception("Invalid Email");
+                	System.out.print("Please Enter the correct Email Id.");
+                	email = br3.readLine();
+                	  b  = actionObj.validateEmail(email);
+                }
                 
 
 				seathold = service.findAndHoldSeats(noOfSeats, minlevel,
@@ -128,7 +137,7 @@ public class ActionFactory extends TimerTask {
 			    	}
 				System.out.println("The Seat Hold Id is "
 						+ seathold.getSeatHoldId());
-				System.out.println("Please confirm the reservation within 60 seconds after you hold the Seats!!!\n ");
+				System.out.println("Please confirm the reservation within 1 minutes after you hold the Seats!!!\n ");
 			} catch (NumberFormatException e) {
 				System.err.println("Please Enter the Required Field.");
 			}
@@ -140,8 +149,8 @@ public class ActionFactory extends TimerTask {
 					.println("Please Enter the SeatHold Id for Reservation confirmation");
 			BufferedReader br = new BufferedReader(new InputStreamReader(
 					System.in));
-			long holdId = Long.parseLong(br.readLine());
-			System.out.println("Please Enter your Email");
+			String holdId = br.readLine();
+			System.out.println("Please Enter your Email.(example@domain.com)");
 			BufferedReader br1 = new BufferedReader(new InputStreamReader(
 					System.in));
 			String customerEmail = br1.readLine();
@@ -151,17 +160,20 @@ public class ActionFactory extends TimerTask {
 			String reservationCode = service.reserveSeats(holdId,
 					customerEmail, seathold);
 			
-			String message = "Reservation Confirmed!\n Your Reservation has been done.Your Reservation Code is "+reservationCode+"\n Thank you!";
 			
-			System.err.println(message);
+			if(seathold!= null){
 			for (Map.Entry<Integer, Integer> entry : seathold.getSeatHoldMap().entrySet()) {
 			    Integer key = entry.getKey();
 			    Integer value = entry.getValue();
-			  System.err.println( level[key] +":"+value);
+			    reservationCode += level[key] +":"+value;
 		    	}
+			}
+			System.out.println(reservationCode);
 		}
 	}
-
+    /**
+     * method run by timer thread in 1 minutes when Seats are hold
+     */
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
