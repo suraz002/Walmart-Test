@@ -59,7 +59,7 @@ public class FindAndHoldTest {
 
 	@Test
 	public void ReservationTest() {
-		String expected = "Res"+Long.toString(seathold.getSeatHoldId()).substring(0,5);
+		String expected = "Res"+Long.toString(seathold.getSeatHoldId()).substring(9,13);
 		reservationCode = o.reserveSeats(seathold.getSeatHoldId(), "shakya.suraj07@gmail.com", seathold);
 		assertEquals(reservationCode,expected);
 	}
