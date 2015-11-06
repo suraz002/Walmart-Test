@@ -48,6 +48,7 @@ To verify it, run mvn –version in the command prompt.
  'mvn test'.
  
  11. To execute the project type command - "mvn exec:java"
+ 12. Please refer the images  for build and test purpose.
  
  
  If You are using  Eclipse with Maven Plugin, just import as the maven project. POm will download all required files.
